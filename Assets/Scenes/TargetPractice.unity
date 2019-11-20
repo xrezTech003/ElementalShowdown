@@ -201,7 +201,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &190509340
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1025,7 +1025,23 @@ MonoBehaviour:
   leftHand: {fileID: 1200858994}
   lightningObject: {fileID: 356811341641545935, guid: cb40f759c33faf34ea46b41b541daad8,
     type: 3}
+  fireObject: {fileID: 8201192764391753325, guid: 9bbb507fefc340c4ba7ffffd2e442127,
+    type: 3}
+  waterObject: {fileID: 863090573308891107, guid: 4a68e8454216c0d41872924b3f831c7e,
+    type: 3}
+  earthObject: {fileID: 201207079046840977, guid: a68254b22b4288c45993e6463b622078,
+    type: 3}
+  airObject: {fileID: 6169885132044457292, guid: 7ffb9e5c3ba742545a25015be41089e5,
+    type: 3}
   lightningProjectile: {fileID: 356811341641545935, guid: cb40f759c33faf34ea46b41b541daad8,
+    type: 3}
+  fireProjectile: {fileID: 8201192764391753325, guid: 9bbb507fefc340c4ba7ffffd2e442127,
+    type: 3}
+  waterProjectile: {fileID: 863090573308891107, guid: 4a68e8454216c0d41872924b3f831c7e,
+    type: 3}
+  earthProjectile: {fileID: 201207079046840977, guid: a68254b22b4288c45993e6463b622078,
+    type: 3}
+  airProjectile: {fileID: 6169885132044457292, guid: 7ffb9e5c3ba742545a25015be41089e5,
     type: 3}
   retical: {fileID: 1655284101}
   currState: 0
@@ -1060,7 +1076,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Camera: {fileID: 1693131601}
   rightHand: {fileID: 1556555362}
-  reticalObject: {fileID: 6169885132044457292, guid: 7ffb9e5c3ba742545a25015be41089e5,
+  reticalObject: {fileID: 8750107380826277596, guid: 2e987e039d874ab4eaa081b18d57bb47,
     type: 3}
   reticalTransform: {fileID: 0}
 --- !u!4 &1655284103

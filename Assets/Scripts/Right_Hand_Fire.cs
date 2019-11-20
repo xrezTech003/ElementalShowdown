@@ -8,13 +8,26 @@ public class Right_Hand_Fire : MonoBehaviour
     public GameObject leftHand;
 
     public GameObject lightningObject;
+    public GameObject fireObject;
+    public GameObject waterObject;
+    public GameObject earthObject;
+    public GameObject airObject;
+
     public GameObject lightningProjectile;
+    public GameObject fireProjectile;
+    public GameObject waterProjectile;
+    public GameObject earthProjectile;
+    public GameObject airProjectile;
 
     public GameObject retical;
 
     public Left_Hand_Tracker.state currState;
 
-    MLHandKeyPose[] gestures;
+    private MLHandKeyPose[] gestures;
+
+    private int interval;
+    private int currTime;
+    private float speed;
 
     void Start()
     {
@@ -26,6 +39,10 @@ public class Right_Hand_Fire : MonoBehaviour
         MLHands.KeyPoseManager.EnableKeyPoses(gestures, true, false);
 
         currState = Left_Hand_Tracker.state.NONE;
+
+        interval = 40;
+        currTime = interval;
+        speed = 100f;
     }
 
     void Update()
@@ -33,7 +50,8 @@ public class Right_Hand_Fire : MonoBehaviour
         transform.position = MLHands.Right.Center;
         checkState();
 
-        if (GetGesture(MLHands.Right, MLHandKeyPose.OpenHand) && currState != Left_Hand_Tracker.state.NONE) fireProjectile();
+        if (GetGesture(MLHands.Right, MLHandKeyPose.OpenHand) && currState != Left_Hand_Tracker.state.NONE) fireElement();
+        else if (currTime != interval) currTime = interval;
     }
 
     private void OnDestroy()
@@ -41,26 +59,49 @@ public class Right_Hand_Fire : MonoBehaviour
         MLHands.Stop();
     }
 
-    void fireProjectile()
+    void fireElement()
     {
 
         GameObject projectile;
 
         if (currState == Left_Hand_Tracker.state.LIGHTNING)
         {
-            projectile = Instantiate(lightningProjectile);
-            projectile.transform.position = retical.GetComponent<Retical_Handler>().reticalTransform.position;
-            projectile.AddComponent<Rigidbody>();
-            projectile.GetComponent<Rigidbody>().AddForce(projectile.transform.position * 5f);
+            projectile = Instantiate(lightningProjectile, transform);
+        }
+        else if (currState == Left_Hand_Tracker.state.FIRE)
+        {
+            projectile = Instantiate(fireProjectile, transform);
+        }
+        else if (currState == Left_Hand_Tracker.state.WATER)
+        {
+            projectile = Instantiate(waterProjectile, transform);
+        }
+        else if (currState == Left_Hand_Tracker.state.EARTH)
+        {
+            projectile = Instantiate(earthProjectile, transform);
+        }
+        else if (currState == Left_Hand_Tracker.state.AIR)
+        {
+            projectile = Instantiate(airProjectile, transform);
         }
         else
         {
             return;
         }
 
-
-
-
+        if (currTime >= interval)
+        {
+            projectile.transform.position = retical.GetComponent<Retical_Handler>().reticalTransform.position;
+            projectile.AddComponent<Rigidbody>();
+            projectile.GetComponent<Rigidbody>().useGravity = false;
+            projectile.GetComponent<Rigidbody>().AddRelativeForce(projectile.transform.localPosition * speed);
+            projectile.transform.parent = null;
+            currTime = 0;
+        }
+        else
+        {
+            currTime++;
+        }
     }
 
     void checkState()
@@ -80,6 +121,74 @@ public class Right_Hand_Fire : MonoBehaviour
                 transform.GetChild(0).localPosition = Vector3.zero;
 
                 currState = Left_Hand_Tracker.state.LIGHTNING;
+            }
+        }
+        else if (leftHand.GetComponent<Left_Hand_Tracker>().currState == Left_Hand_Tracker.state.FIRE)
+        {
+            if (currState != Left_Hand_Tracker.state.FIRE)
+            {
+                if (transform.childCount > 0)
+                {
+                    Transform tempTran = transform.GetChild(0);
+                    tempTran.parent = null;
+                    Destroy(tempTran.gameObject);
+                }
+
+                Instantiate(fireObject, transform);
+                transform.GetChild(0).localPosition = Vector3.zero;
+
+                currState = Left_Hand_Tracker.state.FIRE;
+            }
+        }
+        else if (leftHand.GetComponent<Left_Hand_Tracker>().currState == Left_Hand_Tracker.state.WATER)
+        {
+            if (currState != Left_Hand_Tracker.state.WATER)
+            {
+                if (transform.childCount > 0)
+                {
+                    Transform tempTran = transform.GetChild(0);
+                    tempTran.parent = null;
+                    Destroy(tempTran.gameObject);
+                }
+
+                Instantiate(waterObject, transform);
+                transform.GetChild(0).localPosition = Vector3.zero;
+
+                currState = Left_Hand_Tracker.state.WATER;
+            }
+        }
+        else if (leftHand.GetComponent<Left_Hand_Tracker>().currState == Left_Hand_Tracker.state.EARTH)
+        {
+            if (currState != Left_Hand_Tracker.state.WATER)
+            {
+                if (transform.childCount > 0)
+                {
+                    Transform tempTran = transform.GetChild(0);
+                    tempTran.parent = null;
+                    Destroy(tempTran.gameObject);
+                }
+
+                Instantiate(earthObject, transform);
+                transform.GetChild(0).localPosition = Vector3.zero;
+
+                currState = Left_Hand_Tracker.state.EARTH;
+            }
+        }
+        else if (leftHand.GetComponent<Left_Hand_Tracker>().currState == Left_Hand_Tracker.state.AIR)
+        {
+            if (currState != Left_Hand_Tracker.state.WATER)
+            {
+                if (transform.childCount > 0)
+                {
+                    Transform tempTran = transform.GetChild(0);
+                    tempTran.parent = null;
+                    Destroy(tempTran.gameObject);
+                }
+
+                Instantiate(airObject, transform);
+                transform.GetChild(0).localPosition = Vector3.zero;
+
+                currState = Left_Hand_Tracker.state.AIR;
             }
         }
         else
