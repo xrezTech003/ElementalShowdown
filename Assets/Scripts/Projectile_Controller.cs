@@ -14,5 +14,6 @@ public class Projectile_Controller : MonoBehaviour
     void Update()
     {
         transform.LookAt(start);
+        if (Vector3.Distance(transform.position, start) > 30f) Destroy(gameObject);
     }
 }

@@ -4,13 +4,17 @@ using UnityEngine;
 
 public class Enemy_Handler : MonoBehaviour
 {
-    public int life = 5;
-    private string weakness;
+    public enum typing { NONE, AIR, FIRE, WATER, EARTH, LIGHTNING };
+    public bool respawn;
+
+    public int life;
+    public typing weakness;
+    public typing secondaryWeakness;
+
     private GameObject Camera;
 
     void Start()
     {
-        weakness = "NONE";
         Camera = GameObject.Find("Main Camera");
     }
 
@@ -21,7 +25,22 @@ public class Enemy_Handler : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Destroy(gameObject);
+        Destroy(other.gameObject);
+
+        /*
+        if (respawn)
+        {
+            gameObject.SetActive(false);
+
+            for (int i = 0; i < 120; i++);
+
+            gameObject.SetActive(true);
+        }
+        else
+        {
+        */
+            Destroy(gameObject);
+        //}
     }
 
     void takeDamage()

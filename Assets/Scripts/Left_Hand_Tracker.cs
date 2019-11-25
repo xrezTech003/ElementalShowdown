@@ -9,11 +9,23 @@ public class Left_Hand_Tracker : MonoBehaviour
     public enum state { NONE, AIR, LIGHTNING, FIRE, WATER, EARTH, SMOKE };
     public state currState;
 
+    public GameObject Camera;
+
     public GameObject airObject;
     public GameObject lightningObject;
     public GameObject fireObject;
     public GameObject waterObject;
     public GameObject earthObject;
+
+    public GameObject lightningProjectile;
+    public GameObject fireProjectile;
+    public GameObject waterProjectile;
+    public GameObject airProjectile;
+    public GameObject earthProjectile;
+
+    private int interval;
+    private int currTime;
+    private float speed;
 
     MLHandKeyPose[] gestures;
     #endregion
@@ -33,6 +45,10 @@ public class Left_Hand_Tracker : MonoBehaviour
         MLHands.Start();
 
         MLHands.KeyPoseManager.EnableKeyPoses(gestures, true, false);
+
+        interval = 30;
+        currTime = interval;
+        speed = 200f;
     }
 
     private void OnDestroy()
@@ -44,10 +60,66 @@ public class Left_Hand_Tracker : MonoBehaviour
     {
         transform.position = MLHands.Left.Center;
         checkState();
+        if (currState != state.NONE) fireElement();
     }
     #endregion
 
     #region User Defined Functions
+    void fireElement()
+    {
+        GameObject projectile;
+
+        if (currTime >= interval)
+        {
+            if (currState == state.LIGHTNING)
+            {
+                projectile = Instantiate(lightningProjectile, transform);
+            }
+            else if (currState == state.FIRE)
+            {
+                projectile = Instantiate(fireProjectile, transform);
+            }
+            else if (currState == state.WATER)
+            {
+                projectile = Instantiate(waterProjectile, transform);
+            }
+            else if (currState == state.AIR)
+            {
+                projectile = Instantiate(airProjectile, transform);
+            }
+            else if (currState == state.EARTH)
+            {
+                projectile = Instantiate(earthProjectile, transform);
+            }
+            else
+            {
+                return;
+            }
+
+            projectile.transform.position = getReticalPosition();
+            projectile.AddComponent<Rigidbody>();
+            projectile.GetComponent<Rigidbody>().useGravity = false;
+            projectile.GetComponent<Rigidbody>().AddRelativeForce(projectile.transform.localPosition * speed);
+            projectile.transform.parent = null;
+
+            currTime = 0;
+        }
+        else
+        {
+            currTime++;
+        }
+    }
+
+    Vector3 getReticalPosition()
+    {
+        Vector3 tempVec;
+
+        Vector3 slope = transform.position - Camera.transform.position;
+        tempVec = transform.position + slope * 1.5f;
+
+        return tempVec;
+    }
+
     void checkState()
     {
         if (GetGesture(MLHands.Left, MLHandKeyPose.Finger))
