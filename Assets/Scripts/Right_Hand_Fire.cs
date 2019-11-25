@@ -10,14 +10,14 @@ public class Right_Hand_Fire : MonoBehaviour
     public GameObject lightningObject;
     public GameObject fireObject;
     public GameObject waterObject;
-    public GameObject earthObject;
     public GameObject airObject;
+    public GameObject earthObject;
 
     public GameObject lightningProjectile;
     public GameObject fireProjectile;
     public GameObject waterProjectile;
-    public GameObject earthProjectile;
     public GameObject airProjectile;
+    public GameObject earthProjectile;
 
     public GameObject retical;
 
@@ -40,9 +40,9 @@ public class Right_Hand_Fire : MonoBehaviour
 
         currState = Left_Hand_Tracker.state.NONE;
 
-        interval = 40;
+        interval = 30;
         currTime = interval;
-        speed = 100f;
+        speed = 200f;
     }
 
     void Update()
@@ -64,44 +64,47 @@ public class Right_Hand_Fire : MonoBehaviour
 
         GameObject projectile;
 
-        if (currState == Left_Hand_Tracker.state.LIGHTNING)
-        {
-            projectile = Instantiate(lightningProjectile, transform);
-        }
-        else if (currState == Left_Hand_Tracker.state.FIRE)
-        {
-            projectile = Instantiate(fireProjectile, transform);
-        }
-        else if (currState == Left_Hand_Tracker.state.WATER)
-        {
-            projectile = Instantiate(waterProjectile, transform);
-        }
-        else if (currState == Left_Hand_Tracker.state.EARTH)
-        {
-            projectile = Instantiate(earthProjectile, transform);
-        }
-        else if (currState == Left_Hand_Tracker.state.AIR)
-        {
-            projectile = Instantiate(airProjectile, transform);
-        }
-        else
-        {
-            return;
-        }
-
         if (currTime >= interval)
         {
+            if (currState == Left_Hand_Tracker.state.LIGHTNING)
+            {
+                projectile = Instantiate(lightningProjectile, transform);
+            }
+            else if (currState == Left_Hand_Tracker.state.FIRE)
+            {
+                projectile = Instantiate(fireProjectile, transform);
+            }
+            else if (currState == Left_Hand_Tracker.state.WATER)
+            {
+                projectile = Instantiate(waterProjectile, transform);
+            }
+            else if (currState == Left_Hand_Tracker.state.AIR)
+            {
+                projectile = Instantiate(airProjectile, transform);
+            }
+            else if (currState == Left_Hand_Tracker.state.EARTH)
+            {
+                projectile = Instantiate(earthProjectile, transform);
+            }
+            else
+            {
+                return;
+            }
+
             projectile.transform.position = retical.GetComponent<Retical_Handler>().reticalTransform.position;
+            //projectile.transform.localRotation = Quaternion.Euler(90, 0, 0);
             projectile.AddComponent<Rigidbody>();
             projectile.GetComponent<Rigidbody>().useGravity = false;
             projectile.GetComponent<Rigidbody>().AddRelativeForce(projectile.transform.localPosition * speed);
             projectile.transform.parent = null;
+
             currTime = 0;
         }
         else
         {
             currTime++;
         }
+      
     }
 
     void checkState()
@@ -125,7 +128,7 @@ public class Right_Hand_Fire : MonoBehaviour
         }
         else if (leftHand.GetComponent<Left_Hand_Tracker>().currState == Left_Hand_Tracker.state.FIRE)
         {
-            if (currState != Left_Hand_Tracker.state.FIRE)
+            if (currState != Left_Hand_Tracker.state.LIGHTNING)
             {
                 if (transform.childCount > 0)
                 {
@@ -142,7 +145,7 @@ public class Right_Hand_Fire : MonoBehaviour
         }
         else if (leftHand.GetComponent<Left_Hand_Tracker>().currState == Left_Hand_Tracker.state.WATER)
         {
-            if (currState != Left_Hand_Tracker.state.WATER)
+            if (currState != Left_Hand_Tracker.state.LIGHTNING)
             {
                 if (transform.childCount > 0)
                 {
@@ -157,26 +160,9 @@ public class Right_Hand_Fire : MonoBehaviour
                 currState = Left_Hand_Tracker.state.WATER;
             }
         }
-        else if (leftHand.GetComponent<Left_Hand_Tracker>().currState == Left_Hand_Tracker.state.EARTH)
-        {
-            if (currState != Left_Hand_Tracker.state.WATER)
-            {
-                if (transform.childCount > 0)
-                {
-                    Transform tempTran = transform.GetChild(0);
-                    tempTran.parent = null;
-                    Destroy(tempTran.gameObject);
-                }
-
-                Instantiate(earthObject, transform);
-                transform.GetChild(0).localPosition = Vector3.zero;
-
-                currState = Left_Hand_Tracker.state.EARTH;
-            }
-        }
         else if (leftHand.GetComponent<Left_Hand_Tracker>().currState == Left_Hand_Tracker.state.AIR)
         {
-            if (currState != Left_Hand_Tracker.state.WATER)
+            if (currState != Left_Hand_Tracker.state.LIGHTNING)
             {
                 if (transform.childCount > 0)
                 {
@@ -189,6 +175,23 @@ public class Right_Hand_Fire : MonoBehaviour
                 transform.GetChild(0).localPosition = Vector3.zero;
 
                 currState = Left_Hand_Tracker.state.AIR;
+            }
+        }
+        else if (leftHand.GetComponent<Left_Hand_Tracker>().currState == Left_Hand_Tracker.state.EARTH)
+        {
+            if (currState != Left_Hand_Tracker.state.LIGHTNING)
+            {
+                if (transform.childCount > 0)
+                {
+                    Transform tempTran = transform.GetChild(0);
+                    tempTran.parent = null;
+                    Destroy(tempTran.gameObject);
+                }
+
+                Instantiate(earthObject, transform);
+                transform.GetChild(0).localPosition = Vector3.zero;
+
+                currState = Left_Hand_Tracker.state.EARTH;
             }
         }
         else

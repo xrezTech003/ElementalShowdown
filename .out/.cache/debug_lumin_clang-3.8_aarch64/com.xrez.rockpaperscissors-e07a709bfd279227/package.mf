@@ -2,16 +2,16 @@
  "entries": [
   {
    "compression": 8,
-   "hash": "3e5d86b3e8c4af7ef2e038e99f5849742c710e34",
+   "hash": "7929a025c5be79385851d68461de9100746358a6",
    "pkgpath": "Data/Managed/Metadata/global-metadata.dat",
-   "size": 3294252,
+   "size": 3296568,
    "src": "C:/Users/xrezIsaac001/Desktop/RockPaperScissors/Temp/StagingArea/Data/Managed/Metadata/global-metadata.dat"
   },
   {
    "compression": 8,
-   "hash": "9bf60b61448b56cf8c3132a0e733bd2a8e30328c",
+   "hash": "4510c11a45c09d61e34c48ee830183f023cc60be",
    "pkgpath": "bin/libil2cpp.so",
-   "size": 53378440,
+   "size": 53408592,
    "src": "C:/Users/xrezIsaac001/Desktop/RockPaperScissors/Temp/StagingArea/Data/Native/libil2cpp.so",
    "xfrm_flags": {
     "signed": {
@@ -23,9 +23,9 @@
      "version": 3
     }
    },
-   "xfrm_hash": "2145b7a63dba9f185cbce61fb3d99513196b83e2",
+   "xfrm_hash": "1123cf041ab939c695dcb63f0e1d6c73023e421d",
    "xfrm_path": "C:/Users/xrezIsaac001/Desktop/RockPaperScissors/.out/.cache/debug_lumin_clang-3.8_aarch64/com.xrez.rockpaperscissors-e07a709bfd279227\\libil2cpp.so-21ad419cb7bb1910",
-   "xfrm_size": 53379198
+   "xfrm_size": 53409350
   },
   {
    "compression": 8,
@@ -172,23 +172,23 @@
   },
   {
    "compression": 8,
-   "hash": "23aa4f8a2321ed51dff2eb07a90370031588c86b",
+   "hash": "9079426cd70286ab9771b93cc24f6788ae8f1cc3",
    "pkgpath": "Data/globalgamemanagers",
-   "size": 60440,
+   "size": 60640,
    "src": "C:/Users/xrezIsaac001/Desktop/RockPaperScissors/Temp/StagingArea/Data/globalgamemanagers"
   },
   {
    "compression": 8,
-   "hash": "aafbd4594f3bed1934287190f59b62d90ddc6ebc",
+   "hash": "134568e1f43aa9020912e9b9e607f8dd5fd7327d",
    "pkgpath": "Data/globalgamemanagers.assets",
-   "size": 85132,
+   "size": 85476,
    "src": "C:/Users/xrezIsaac001/Desktop/RockPaperScissors/Temp/StagingArea/Data/globalgamemanagers.assets"
   },
   {
    "compression": 8,
-   "hash": "e4ac7cf6c223220fcc48a52d311ae0e6e96fbdcc",
+   "hash": "c776078ccdf7a8188ad9e972b79500aa70e727d9",
    "pkgpath": "Data/level0",
-   "size": 15220,
+   "size": 19660,
    "src": "C:/Users/xrezIsaac001/Desktop/RockPaperScissors/Temp/StagingArea/Data/level0"
   },
   {
@@ -200,7 +200,7 @@
   },
   {
    "compression": 8,
-   "hash": "f0d3b2e2e98caceb08d3c06c28201a99bc1b4d3a",
+   "hash": "ae4fa52c4a8116bf56625949e8d2b04a348d7366",
    "pkgpath": "Data/resources.assets",
    "size": 553160,
    "src": "C:/Users/xrezIsaac001/Desktop/RockPaperScissors/Temp/StagingArea/Data/resources.assets"
@@ -221,16 +221,16 @@
   },
   {
    "compression": 8,
-   "hash": "2b4a2ada5e08f86ffc44006946f84dbcc0b72030",
+   "hash": "78a79dedb22d5d9887166d354ec57ea265740ee8",
    "pkgpath": "Data/sharedassets0.assets",
-   "size": 636604,
+   "size": 1283140,
    "src": "C:/Users/xrezIsaac001/Desktop/RockPaperScissors/Temp/StagingArea/Data/sharedassets0.assets"
   },
   {
    "compression": 8,
-   "hash": "3e1d8b089bc71fdf29bbbfa60050ae20333c9f96",
+   "hash": "c9e8e206903e42db79690dfb70cc4dc38be9408f",
    "pkgpath": "Data/sharedassets0.assets.resS",
-   "size": 9119752,
+   "size": 9437264,
    "src": "C:/Users/xrezIsaac001/Desktop/RockPaperScissors/Temp/StagingArea/Data/sharedassets0.assets.resS"
   },
   {

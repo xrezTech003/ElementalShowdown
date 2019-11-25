@@ -15,18 +15,28 @@ public class Retical_Handler : MonoBehaviour
 
     private void Start()
     {
-        reticalTransform = Instantiate(reticalObject, transform).transform;
+        
     }
 
     void Update()
     {
-        if (rightHand.GetComponent<Right_Hand_Fire>().currState != Left_Hand_Tracker.state.NONE) getPosition();
-        else reticalTransform.position = new Vector3(0, 1, 0);
+        if (rightHand.GetComponent<Right_Hand_Fire>().currState != Left_Hand_Tracker.state.NONE)
+        {
+            if (reticalTransform == null) reticalTransform = Instantiate(reticalObject, transform).transform;
+            getPosition();
+        }
+        else
+        {
+            Destroy(reticalTransform.gameObject);
+            reticalTransform = null;
+        }
     }
 
     void getPosition()
     {
         Vector3 slope = rightHand.transform.position - Camera.transform.position;
         reticalTransform.position = rightHand.transform.position + slope * 1.5f;
+        reticalTransform.position = new Vector3(reticalTransform.position.x, reticalTransform.position.y, reticalTransform.position.z);
+        reticalTransform.LookAt(Camera.transform);
     }
 }

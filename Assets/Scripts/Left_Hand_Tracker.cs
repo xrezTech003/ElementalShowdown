@@ -24,7 +24,7 @@ public class Left_Hand_Tracker : MonoBehaviour
         currState = state.NONE;
 
         gestures = new MLHandKeyPose[5];
-        gestures[0] = MLHandKeyPose.C;
+        gestures[0] = MLHandKeyPose.Finger;
         gestures[1] = MLHandKeyPose.L;
         gestures[2] = MLHandKeyPose.OpenHand;
         gestures[3] = MLHandKeyPose.Ok;
@@ -50,7 +50,7 @@ public class Left_Hand_Tracker : MonoBehaviour
     #region User Defined Functions
     void checkState()
     {
-        if (GetGesture(MLHands.Left, MLHandKeyPose.C))
+        if (GetGesture(MLHands.Left, MLHandKeyPose.Finger))
         {
             if (currState != state.AIR)
             {
